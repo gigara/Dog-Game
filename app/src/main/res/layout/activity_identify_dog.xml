@@ -50,10 +50,11 @@
         android:textAlignment="center" />
 
     <Button
-        android:id="@+id/submit"
+        android:id="@+id/next"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/submit" />
+        android:onClick="next"
+        android:text="@string/next" />
 
     <TextView
         android:id="@+id/answer"

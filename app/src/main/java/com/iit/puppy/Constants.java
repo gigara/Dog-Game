@@ -15,11 +15,7 @@ class Constants {
     static ArrayList<String> getBreedNames() {
         ArrayList<String> breeds = new ArrayList<>();
         for (String breed : BREEDS) {
-            StringBuilder builder = new StringBuilder();
-            for(String s : breed.split("-", 1)) {
-                builder.append(s);
-            }
-            breeds.add(builder.toString());
+            breeds.add(breed.split("-",2)[1]);
         }
         return breeds;
     }
