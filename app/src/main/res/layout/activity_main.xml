@@ -27,4 +27,12 @@
         android:layout_height="wrap_content"
         android:onClick="searchBreed"
         android:text="@string/search_dog_breed" />
+
+    <Switch
+        android:id="@+id/advancedSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:switchPadding="20sp"
+        android:text="@string/advanced_level" />
 </LinearLayout>

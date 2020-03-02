@@ -32,5 +32,13 @@
         android:id="@+id/submitBreed"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:onClick="submit"
         android:text="@string/submit" />
+
+    <TextView
+        android:id="@+id/result"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textSize="25sp" />
 </LinearLayout>

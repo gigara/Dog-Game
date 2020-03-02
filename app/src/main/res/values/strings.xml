@@ -14,4 +14,8 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="dog_image">Dog Image</string>
     <string name="submit">Submit</string>
+    <string name="advanced_level">Advanced Level</string>
+
+    <string name="correct">CORRECT!</string>
+    <string name="wrong">WRONG!</string>
 </resources>
