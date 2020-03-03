@@ -3,6 +3,7 @@ package com.iit.puppy;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -23,13 +24,16 @@ import static com.iit.puppy.Constants.IMAGES;
 public class IdentifyBreed extends AppCompatActivity {
     Spinner breedSpinner;
     TextView result;
+    TextView countdown;
     Button submit;
     String generatedBreed;
+    //Declare timer
+    CountDownTimer cTimer = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        boolean isAdvanced = Boolean.getBoolean(getIntent().getStringExtra("IS_ADVANCED"));
+        boolean isAdvanced = getIntent().getBooleanExtra("IS_ADVANCED", false);
         setContentView(R.layout.activity_identify_breed);
 
         // load spinner data
@@ -42,6 +46,7 @@ public class IdentifyBreed extends AppCompatActivity {
         ImageView dogImage = findViewById(R.id.identifyBreedImage);
         result = findViewById(R.id.result);
         submit = findViewById(R.id.submitBreed);
+        countdown = findViewById(R.id.countdown);
 
         // load random breed
         Random generator = new Random();
@@ -61,12 +66,36 @@ public class IdentifyBreed extends AppCompatActivity {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+
+        // level 2
+        if (isAdvanced) startTimer();
+    }
+
+    //start timer function
+    void startTimer() {
+        cTimer = new CountDownTimer(10000, 1000) {
+            public void onTick(long millisUntilFinished) {
+                countdown.setText(String.valueOf(millisUntilFinished/1000));
+            }
+            public void onFinish() {
+                submit(null);
+            }
+        };
+        cTimer.start();
+    }
+
+
+    //cancel timer
+    void cancelTimer() {
+        if(cTimer!=null)
+            cTimer.cancel();
     }
 
     public void submit(View view) {
+        cancelTimer();
         if (submit.getText().toString().equals(getResources().getString(R.string.submit))) {
             String userInput = Constants.getBreedNames().get(breedSpinner.getSelectedItemPosition());
-            if (userInput.equals(generatedBreed)) {
+            if (userInput.equals(generatedBreed.split("-",2)[1])) {
                 result.setText(R.string.correct);
                 result.setTextColor(Color.GREEN);
             } else {

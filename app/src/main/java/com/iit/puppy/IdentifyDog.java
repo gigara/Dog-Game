@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -25,6 +26,9 @@ public class IdentifyDog extends AppCompatActivity {
     ImageView dogImage2;
     ImageView dogImage3;
     String expectedBreed;
+    TextView countdown;
+    //Declare timer
+    CountDownTimer cTimer = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +40,9 @@ public class IdentifyDog extends AppCompatActivity {
         dogImage3 = findViewById(R.id.identifyDogImage3);
         TextView dogName = findViewById(R.id.dogName);
         answer = findViewById(R.id.answer);
+        countdown = findViewById(R.id.countdown2);
+
+        boolean isAdvanced = getIntent().getBooleanExtra("IS_ADVANCED", false);
 
         // load random breed
         Random generator = new Random();
@@ -93,10 +100,34 @@ public class IdentifyDog extends AppCompatActivity {
         Collections.shuffle(dogs);
         expectedBreed = dogs.get(0).split("-", 2)[1];
         dogName.setText(expectedBreed);
+
+        // level 2
+        if (isAdvanced) startTimer();
+    }
+
+    //start timer function
+    void startTimer() {
+        cTimer = new CountDownTimer(10000, 1000) {
+            public void onTick(long millisUntilFinished) {
+                countdown.setText(String.valueOf(millisUntilFinished/1000));
+            }
+            public void onFinish() {
+                imageClick(null);
+            }
+        };
+        cTimer.start();
+    }
+
+
+    //cancel timer
+    void cancelTimer() {
+        if(cTimer!=null)
+            cTimer.cancel();
     }
 
     public void imageClick(View view) {
-        String imageName = (String) view.getTag();
+        cancelTimer();
+        String imageName = view != null ? (String) view.getTag() : "";
         if (imageName.equals(expectedBreed)) {
             answer.setText(R.string.correct);
             answer.setTextColor(Color.GREEN);
