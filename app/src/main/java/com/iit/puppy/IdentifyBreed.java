@@ -25,6 +25,7 @@ public class IdentifyBreed extends AppCompatActivity {
     Spinner breedSpinner;
     TextView result;
     TextView countdown;
+    TextView answer;
     Button submit;
     String generatedBreed;
     //Declare timer
@@ -47,6 +48,7 @@ public class IdentifyBreed extends AppCompatActivity {
         result = findViewById(R.id.result);
         submit = findViewById(R.id.submitBreed);
         countdown = findViewById(R.id.countdown);
+        answer = findViewById(R.id.answer);
 
         // load random breed
         Random generator = new Random();
@@ -93,14 +95,18 @@ public class IdentifyBreed extends AppCompatActivity {
 
     public void submit(View view) {
         cancelTimer();
+        String correctAnswer = generatedBreed.split("-",2)[1];
         if (submit.getText().toString().equals(getResources().getString(R.string.submit))) {
             String userInput = Constants.getBreedNames().get(breedSpinner.getSelectedItemPosition());
-            if (userInput.equals(generatedBreed.split("-",2)[1])) {
+            if (userInput.equals(correctAnswer)) {
                 result.setText(R.string.correct);
                 result.setTextColor(Color.GREEN);
             } else {
                 result.setText(R.string.wrong);
                 result.setTextColor(Color.RED);
+
+                answer.setText(correctAnswer);
+                answer.setTextColor(Color.BLUE);
             }
             submit.setText(R.string.next);
         } else {
