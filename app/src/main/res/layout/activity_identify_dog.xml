@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    tools:context=".IdentifyBreed">
+    tools:context=".IdentifyDog">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,7 +22,7 @@
 
         <ImageButton
             android:id="@+id/identifyDogImage1"
-            android:layout_width="wrap_content"
+            android:layout_width="150sp"
             android:layout_height="150sp"
             android:layout_gravity="center"
             android:contentDescription="@string/dog_image"
@@ -31,7 +31,7 @@
 
         <ImageButton
             android:id="@+id/identifyDogImage2"
-            android:layout_width="wrap_content"
+            android:layout_width="150sp"
             android:layout_height="150sp"
             android:layout_gravity="center"
             android:contentDescription="@string/dog_image"
@@ -40,7 +40,7 @@
 
         <ImageButton
             android:id="@+id/identifyDogImage3"
-            android:layout_width="wrap_content"
+            android:layout_width="150sp"
             android:layout_height="150sp"
             android:layout_gravity="center"
             android:contentDescription="@string/dog_image"
